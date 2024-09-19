@@ -3,19 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XML'den HTML'e Veri Çekme</title>
+    <title>Kişisel Portföy</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        ul { list-style-type: none; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .project {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .project h2 {
+            margin: 0;
+        }
+        .project p {
+            color: #555;
+        }
+        .project a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .project a:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <h1>Ürün Listesi</h1>
-    <div id="product-list"></div>
+    <h1>Kişisel Portföy</h1>
+    <div id="projects-list"></div>
 
     <script>
         // XML dosyasının URL'sini tanımlayın
-        const xmlUrl = 'data.xml'; // GitHub sayfanızda XML dosyasının yolu
+        const xmlUrl = 'projects.xml'; // GitHub sayfanızda XML dosyasının yolu
 
         fetch(xmlUrl)
             .then(response => {
@@ -27,26 +59,31 @@
             .then(data => {
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(data, "application/xml");
-                displayProducts(xmlDoc);
+                displayProjects(xmlDoc);
             })
             .catch(error => {
                 console.error('Hata:', error);
             });
 
-        function displayProducts(xml) {
-            const products = xml.getElementsByTagName("product");
-            let output = "<ul>";
+        function displayProjects(xml) {
+            const projects = xml.getElementsByTagName("project");
+            let output = "";
 
-            for (let i = 0; i < products.length; i++) {
-                const id = products[i].getElementsByTagName("id")[0].textContent;
-                const name = products[i].getElementsByTagName("name")[0].textContent;
-                const price = products[i].getElementsByTagName("price")[0].textContent;
+            for (let i = 0; i < projects.length; i++) {
+                const title = projects[i].getElementsByTagName("title")[0].textContent;
+                const description = projects[i].getElementsByTagName("description")[0].textContent;
+                const link = projects[i].getElementsByTagName("link")[0].textContent;
 
-                output += `<li>Ürün ID: ${id}, Ad: ${name}, Fiyat: ${price} TL</li>`;
+                output += `
+                    <div class="project">
+                        <h2>${title}</h2>
+                        <p>${description}</p>
+                        <a href="${link}" target="_blank">Detayları Gör</a>
+                    </div>
+                `;
             }
 
-            output += "</ul>";
-            document.getElementById("product-list").innerHTML = output;
+            document.getElementById("projects-list").innerHTML = output;
         }
     </script>
 </body>
