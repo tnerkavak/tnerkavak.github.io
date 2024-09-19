@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<products>
-    <product>
-        <id>1</id>
-        <name>Ürün 1</name>
-        <price>100</price>
-    </product>
-    <product>
-        <id>2</id>
-        <name>Ürün 2</name>
-        <price>150</price>
-    </product>
-    <product>
-        <id>3</id>
-        <name>Ürün 3</name>
-        <price>200</price>
-    </product>
-</products>
+<projects>
+    <project>
+        <title>Proje 1</title>
+        <description>Bu, birinci projemin açıklamasıdır.</description>
+        <link>https://example.com/proje1</link>
+    </project>
+    <project>
+        <title>Proje 2</title>
+        <description>Bu, ikinci projemin açıklamasıdır.</description>
+        <link>https://example.com/proje2</link>
+    </project>
+    <project>
+        <title>Proje 3</title>
+        <description>Bu, üçüncü projemin açıklamasıdır.</description>
+        <link>https://example.com/proje3</link>
+    </project>
+</projects>
